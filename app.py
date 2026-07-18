@@ -7,7 +7,7 @@ from typing import Any, Dict, List
 from xml.sax.saxutils import escape as xml_escape
 
 import boto3
-from botocore.exceptions import ClientError
+from botocore.exceptions import BotoCoreError, ClientError
 from dotenv import load_dotenv
 from flask import Flask, Response, jsonify, redirect, render_template, request, url_for
 from flask_wtf.csrf import CSRFError, CSRFProtect
@@ -311,6 +311,19 @@ def _send_via_ses(
     if not from_addr or not to_addr:
         raise RuntimeError("SES_FROM_EMAIL and SES_TO_EMAIL must be set.")
 
+    # Diagnostic config log: the three plain config values are logged as-is
+    # (they're not secrets), while the AWS credentials are only ever logged
+    # as present/absent booleans, never their actual values.
+    app.logger.info(
+        "SES config check: AWS_REGION=%s SES_FROM_EMAIL=%s SES_TO_EMAIL=%s "
+        "AWS_ACCESS_KEY_ID_present=%s AWS_SECRET_ACCESS_KEY_present=%s",
+        region,
+        from_addr,
+        to_addr,
+        bool(os.environ.get("AWS_ACCESS_KEY_ID", "").strip()),
+        bool(os.environ.get("AWS_SECRET_ACCESS_KEY", "").strip()),
+    )
+
     topic_label = TOPIC_LABELS.get(topic, topic)
     phone_display = phone or "(not provided)"
     submitted_at = datetime.now(timezone.utc).strftime("%B %d, %Y at %I:%M %p UTC")
@@ -367,8 +380,11 @@ def _send_via_ses(
 </html>
 """
 
-    client = boto3.client("ses", region_name=region)
-    response = client.send_email(
+    # SES verified identities and sandbox/production status are scoped per
+    # AWS region, so the client must be pinned to the same AWS_REGION the
+    # sender identity was actually verified in.
+    ses_client = boto3.client("ses", region_name=region)
+    response = ses_client.send_email(
         Source=from_addr,
         Destination={"ToAddresses": [to_addr]},
         Message={
@@ -383,7 +399,16 @@ def _send_via_ses(
         },
         ReplyToAddresses=[email],
     )
-    return {"message_id": response.get("MessageId"), "to_addr": to_addr}
+
+    message_id = response.get("MessageId")
+    if not message_id:
+        # SES returned an HTTP 200 with no MessageId - not a normal outcome,
+        # but never treat it as a success.
+        raise RuntimeError("Amazon SES did not return a MessageId")
+
+    app.logger.info("SES accepted contact email. MessageId=%s", message_id)
+
+    return {"message_id": message_id, "to_addr": to_addr}
 
 
 @app.route("/")
@@ -439,33 +464,53 @@ def contact_submit():
             topic,
         )
     else:
+        # _send_via_ses() only returns once SES has actually accepted the
+        # message and handed back a MessageId (it raises otherwise), so
+        # reaching the line after this call is itself proof of a real send -
+        # there is no path here that falls through to success after an
+        # exception.
         try:
-            ses_result = _send_via_ses(name, email, phone, topic, message)
-            app.logger.info(
-                "Contact form sent via SES: name=%s email=%s topic=%s to=%s message_id=%s",
-                name,
-                email,
-                topic,
-                ses_result.get("to_addr"),
-                ses_result.get("message_id"),
-            )
+            _send_via_ses(name, email, phone, topic, message)
         except ClientError as exc:
-            app.logger.exception("Amazon SES error: %s", exc)
+            # ClientError = AWS itself rejected the request (e.g. unverified
+            # identity, still in sandbox, throttling). Log the specific AWS
+            # error code/message server-side; never show these to the visitor.
+            error_info = exc.response.get("Error", {})
+            app.logger.exception(
+                "Amazon SES ClientError: code=%s message=%s",
+                error_info.get("Code"),
+                error_info.get("Message"),
+            )
             if _wants_json_response():
                 return jsonify(
                     ok=False,
                     error="send",
                     message="We couldn’t send your message right now. Please try again or email us directly.",
-                ), 502
+                ), 500
+            return redirect(url_for("index") + "?error=send#contact", code=303)
+        except BotoCoreError as exc:
+            # BotoCoreError = an SDK/network/config-level failure (e.g. no
+            # credentials found, can't reach the SES endpoint) rather than an
+            # AWS-service-returned rejection. Handled separately so the log
+            # line makes clear which layer failed.
+            app.logger.exception("Amazon SES BotoCoreError: %s", exc)
+            if _wants_json_response():
+                return jsonify(
+                    ok=False,
+                    error="send",
+                    message="We couldn’t send your message right now. Please try again or email us directly.",
+                ), 500
             return redirect(url_for("index") + "?error=send#contact", code=303)
         except Exception as exc:
+            # Catches everything else, including the RuntimeError raised by
+            # _send_via_ses() when SES responds without a MessageId.
             app.logger.exception("Contact send error: %s", exc)
             if _wants_json_response():
                 return jsonify(
                     ok=False,
                     error="send",
                     message="We couldn’t send your message right now. Please try again or email us directly.",
-                ), 502
+                ), 500
             return redirect(url_for("index") + "?error=send#contact", code=303)
 
     if _wants_json_response():
