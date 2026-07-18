@@ -1,4 +1,5 @@
 import html
+import logging
 import os
 import re
 from datetime import datetime, timezone
@@ -25,6 +26,18 @@ app.config["WTF_CSRF_TIME_LIMIT"] = None
 # https:// in production, breaking the canonical URL, OG image URL, and
 # sitemap that were tuned for SEO.
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+
+# Flask's app.logger only gets a console handler automatically under the
+# Flask dev server (`python app.py`). Under gunicorn it has no handler at
+# all, so app.logger.info()/.exception() calls are silently dropped instead
+# of reaching Railway's deploy logs. Gunicorn configures its own
+# "gunicorn.error" logger with working handlers pointed at stderr (that's
+# what Railway is actually capturing), so we reuse those handlers here.
+if __name__ != "__main__":
+    gunicorn_logger = logging.getLogger("gunicorn.error")
+    if gunicorn_logger.handlers:
+        app.logger.handlers = gunicorn_logger.handlers
+        app.logger.setLevel(gunicorn_logger.level)
 
 csrf = CSRFProtect(app)
 
