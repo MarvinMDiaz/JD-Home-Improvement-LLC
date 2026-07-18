@@ -420,6 +420,9 @@ def contact_submit():
     else:
         try:
             _send_via_ses(name, email, phone, topic, message)
+            app.logger.info(
+                "Contact form sent via SES: name=%s email=%s topic=%s", name, email, topic
+            )
         except ClientError as exc:
             app.logger.exception("Amazon SES error: %s", exc)
             if _wants_json_response():
