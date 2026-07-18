@@ -1,0 +1,802 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <div class="hero__copy">
+          <div class="hero__panel">
+            <p class="hero__eyebrow">Trusted Home Improvement, Northern VA &amp; MD</p>
+            <h1 id="hero-heading" class="hero__title">
+              <span class="hero__title-line">Creating Spaces You&rsquo;ll Love</span>
+              <span class="hero__title-line">Coming Home To</span>
+            </h1>
+            <div class="hero__rule" aria-hidden="true"></div>
+            <p class="hero__lede">
+              Premium remodeling and home improvement for Arlington, Springfield, Tysons
+              Corner, Burke, and Silver Spring, plus nearby communities. From repairs and
+              interior refreshes to decks and exterior upgrades, we bring dependable
+              craftsmanship to every project.
+            </p>
+            <a class="cta-button cta-button--hero" href="mailto:info@JDHomeImprovementLLC.com?subject=Free%20Quote%20Request">
+              Get Free Quote
+              <span class="cta-button__icon" aria-hidden="true">↗</span>
+              <span class="visually-hidden">Email us to request a free quote.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about" aria-labelledby="about-heading">
+      <div class="about-section__inner">
+        <div class="about-section__media">
+          <div class="about-section__frame">
+            <img
+              class="about-section__image"
+              src="{{ url_for('static', filename='images/about-home-improvement.webp') }}"
+              width="800"
+              height="800"
+              loading="lazy"
+              decoding="async"
+              alt="Premium residential interior remodeling and home improvement finishes for homeowners in Northern Virginia and Maryland">
+          </div>
+        </div>
+
+        <div class="about-section__content">
+          <p class="about-section__eyebrow">About JD Home Improvement</p>
+          <h2 id="about-heading" class="about-section__title">
+            Quality Work. Honest Service. Built Around Your Home.
+          </h2>
+          <div class="about-section__rule" aria-hidden="true"></div>
+          <div class="about-section__body">
+            <p>
+              JD Home Improvement LLC is dedicated to helping local homeowners in
+              Northern Virginia and Maryland improve, repair, and transform their homes
+              with reliable, detail-focused service. From small upgrades to full
+              renovations, we focus on detail, durability, and clear communication every
+              step of the way.
+            </p>
+            <p>
+              Whether you need remodeling contractors for a kitchen refresh, carpentry and
+              trim, decking, roofing repairs, flooring, painting, or exterior improvements,
+              our team approaches each job with the same care we would bring to our own
+              homes.
+            </p>
+            <p>
+              We believe your home should feel comfortable, functional, and built to
+              last, and we take pride in delivering results you can see and trust.
+            </p>
+          </div>
+          <ul class="about-section__highlights" aria-label="What homeowners can expect">
+            <li class="about-section__highlight">
+              <span class="about-section__highlight-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.5 5L7.5 13L3.5 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>Interior &amp; exterior improvements</span>
+            </li>
+            <li class="about-section__highlight">
+              <span class="about-section__highlight-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.5 5L7.5 13L3.5 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>Remodeling &amp; repairs</span>
+            </li>
+            <li class="about-section__highlight">
+              <span class="about-section__highlight-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.5 5L7.5 13L3.5 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>Detail-focused craftsmanship</span>
+            </li>
+            <li class="about-section__highlight">
+              <span class="about-section__highlight-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.5 5L7.5 13L3.5 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>Reliable &amp; professional service</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section" id="services" aria-labelledby="services-heading">
+      <div class="services-section__inner">
+        <header class="services-section__header">
+          <p class="services-section__eyebrow">Our Services</p>
+          <div class="services-section__title-wrap">
+            <h2 id="services-heading" class="services-section__title">
+              Quality Craftsmanship for Every Part of Your Home
+            </h2>
+          </div>
+          <div class="services-section__rule" aria-hidden="true"></div>
+          <p class="services-section__intro">
+            From kitchens and baths to decks, repairs, and finishing touches, we deliver
+            dependable remodeling and home improvement across Northern Virginia and the
+            Silver Spring area, with the premium execution local homeowners expect.
+          </p>
+        </header>
+
+        <ul class="services-section__grid">
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/kitchenremodeling.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Kitchen remodeling and custom cabinetry for Arlington VA and Northern Virginia homeowners"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 11h16v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8zM7 11V7a1 1 0 011-1h8a1 1 0 011 1v4M10 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Kitchen &amp; Bath Remodeling</h3>
+                    <p class="services-card__text">Elevated kitchens and serene baths tailored to daily life and lasting style.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/exteriorImprovements.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Exterior home improvements, siding and trim for Springfield VA and Fairfax County homes"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 11.5L12 5l9 6.5V19a1 1 0 01-1 1H4a1 1 0 01-1-1v-7.5zM9 20v-5h6v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Exterior Improvements</h3>
+                    <p class="services-card__text">Siding, trim, and outdoor details that protect your home and boost curb appeal.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/repairs.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Professional home repairs and maintenance for Burke VA and Northern Virginia"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.7 6.3a1 1 0 011.4 0l1.6 1.6a1 1 0 010 1.4l-3.1 3.1-3-3 3.1-3.1zM4 20l7.5-7.5M8.5 15.5L11 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10.5 7.5L13 10M16 4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Repairs &amp; Maintenance</h3>
+                    <p class="services-card__text">Responsive fixes that restore integrity and prevent costly surprises.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/painting.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Interior and exterior painting and finishing for Tysons Corner and Northern Virginia residences"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 20h8M6 20a2 2 0 002-2v-8l2-2V4h4v4l2 2v8a2 2 0 002 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 6v2M14 6v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Painting &amp; Finishing</h3>
+                    <p class="services-card__text">Impeccable prep and finish for interiors and exteriors that age beautifully.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/flooring.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Hardwood and luxury flooring installation for Silver Spring MD and Montgomery County homes"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 4h7v7H4V4zM13 4h7v7h-7V4zM4 13h7v7H4v-7zM13 13h7v7h-7v-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Flooring &amp; Trim</h3>
+                    <p class="services-card__text">Floors and millwork that ground each room with precision and continuity.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/carpentry.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Custom carpentry, trim, and built-ins by remodeling contractors in Northern VA and Maryland"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 18h16M7 18l3-10 4 10M6 8l4-4 4 4-4 4-4-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Carpentry &amp; Built-Ins</h3>
+                    <p class="services-card__text">Structural work and custom woodcraft built with square, true, enduring quality.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/powerwashing.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Power washing for siding and decks in Arlington, Burke, and surrounding Northern Virginia"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 3v14M9 10h6M7 14h10M12 17v4M9 21h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M15 6l2-2 2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Power Washing</h3>
+                    <p class="services-card__text">Deep, careful cleaning for siding, decks, and hardscapes, done right every time.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/outdoor.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Deck construction and outdoor living upgrades for Northern Virginia homes"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4 17h16M4 14h16M4 11h16M4 8h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                      <path d="M4 8V6a1 1 0 011-1h14a1 1 0 011 1v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Decks &amp; Outdoor Living</h3>
+                    <p class="services-card__text">New builds and upgrades engineered for safety, comfort, and lasting seasons outside.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="services-section__grid-cell">
+            <a class="services-card" href="{{ url_for('index', _anchor='contact') }}">
+              <div class="services-card__bg" aria-hidden="true">
+                <img
+                  class="services-card__img"
+                  src="{{ url_for('static', filename='images/roofing.webp') }}"
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Roof repairs and weatherproofing for Springfield, Burke, and the wider Northern Virginia region"
+                >
+                <div class="services-card__scrim"></div>
+              </div>
+              <div class="services-card__content">
+                <div class="services-card__textblock">
+                  <span class="services-card__icon" aria-hidden="true">
+                    <svg class="services-card__svg" width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2 18l10-8 10 8M4 18v3h16v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M9 21v-5h6v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div class="services-card__copy">
+                    <h3 class="services-card__title">Roofing &amp; Weatherproofing</h3>
+                    <p class="services-card__text">Targeted roof repairs and weather-savvy details that shield what matters most.</p>
+                  </div>
+                </div>
+                <span class="services-card__arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <div class="services-section__cta">
+          <p class="services-section__cta-label">Need help with your next project?</p>
+          <a class="cta-button cta-button--services" href="mailto:info@JDHomeImprovementLLC.com?subject=Free%20Quote%20Request">
+            Get Free Quote
+            <span class="cta-button__icon" aria-hidden="true">↗</span>
+            <span class="visually-hidden">Email us to request a free quote.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-section" id="projects" aria-labelledby="projects-heading">
+      <div class="projects-section__inner">
+        <header class="projects-section__header">
+          <p class="projects-section__eyebrow">Our Projects</p>
+          <h2 id="projects-heading" class="projects-section__title">
+            See the Difference Quality Work Makes
+          </h2>
+          <p class="projects-section__intro">
+            Recent remodeling and home improvement work from across Northern Virginia and nearby
+            Maryland. Before-and-after moments that highlight carpentry, painting, decking, and
+            whole-room upgrades built for real families.
+          </p>
+        </header>
+
+        <div class="projects-filter" role="group" aria-label="Filter projects by category">
+          <button type="button" class="projects-filter__chip projects-filter__chip--active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="projects-filter__chip" data-filter="interior" aria-pressed="false">Interior</button>
+          <button type="button" class="projects-filter__chip" data-filter="exterior" aria-pressed="false">Exterior</button>
+          <button type="button" class="projects-filter__chip" data-filter="remodeling" aria-pressed="false">Remodeling</button>
+          <button type="button" class="projects-filter__chip" data-filter="repairs" aria-pressed="false">Repairs</button>
+          <button type="button" class="projects-filter__chip" data-filter="painting" aria-pressed="false">Painting</button>
+        </div>
+
+        <div class="projects-pages">
+          <div
+            class="projects-section__page"
+            id="projects-page-1"
+            data-page="1"
+            role="tabpanel"
+            aria-label="Projects page 1"
+          >
+            <div class="projects-section__grid">
+          <article class="projects-card" data-categories="interior remodeling" id="project-kitchen-upgrade">
+            <p class="projects-card__category">Kitchen · Remodeling</p>
+            <h3 class="projects-card__title">Kitchen Upgrade</h3>
+            <div class="projects-card__compare" data-compare-container>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">Before</figcaption>
+                <span class="projects-card__badge" aria-hidden="true">Before</span>
+                <img
+                  class="projects-card__img"
+                  src="{{ url_for('static', filename='images/before-after/before_01.webp') }}"
+                  width="1200"
+                  height="1600"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Kitchen remodeling in progress: Northern Virginia residential project before cabinetry upgrade">
+              </figure>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">After</figcaption>
+                <span class="projects-card__badge projects-card__badge--after" aria-hidden="true">After</span>
+                <img
+                  class="projects-card__img"
+                  src="{{ url_for('static', filename='images/before-after/after_01.webp') }}"
+                  width="1600"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Luxury kitchen remodeling finished: cabinetry, countertops, and stainless appliances, NOVA portfolio project">
+              </figure>
+            </div>
+            <p class="projects-card__text">
+              Full kitchen upgrade with improved cabinetry, countertops, and appliance layout, built for daily use
+              and lasting durability.
+            </p>
+          </article>
+
+          <article class="projects-card" data-categories="interior remodeling painting" id="project-accent-wall">
+            <p class="projects-card__category">Interior · Trim &amp; Painting</p>
+            <h3 class="projects-card__title">Custom Accent Wall</h3>
+            <div class="projects-card__compare" data-compare-container>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">Before</figcaption>
+                <span class="projects-card__badge" aria-hidden="true">Before</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/before_02.webp') }}" width="1200" height="1600" loading="lazy" decoding="async" alt="Interior accent wall remodeling: geometric wood trim layout before paint, Northern VA home">
+              </figure>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">After</figcaption>
+                <span class="projects-card__badge projects-card__badge--after" aria-hidden="true">After</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/after_02.webp') }}" width="1600" height="1200" loading="lazy" decoding="async" alt="Finished custom accent wall with painted trim, residential interior remodeling Montgomery County MD region">
+              </figure>
+            </div>
+            <p class="projects-card__text">
+              Dimensional accent wall with custom trim layout and a finished paint package. It adds depth, character,
+              and a tailored focal point to the room.
+            </p>
+          </article>
+
+          <article class="projects-card" data-categories="exterior repairs" id="project-deck-restoration">
+            <p class="projects-card__category">Exterior · Deck Care</p>
+            <h3 class="projects-card__title">Deck Cleaning &amp; Restoration</h3>
+            <div class="projects-card__compare" data-compare-container>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">Before</figcaption>
+                <span class="projects-card__badge" aria-hidden="true">Before</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/before_03.webp') }}" width="1200" height="1600" loading="lazy" decoding="async" alt="Wood deck before power washing: exterior repairs and restoration, Northern Virginia home">
+              </figure>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">After</figcaption>
+                <span class="projects-card__badge projects-card__badge--after" aria-hidden="true">After</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/after_03.webp') }}" width="900" height="1600" loading="lazy" decoding="async" alt="Deck cleaning and restoration after: exterior home improvement contractor result, Fairfax County area">
+              </figure>
+            </div>
+            <p class="projects-card__text">
+              Professional pressure washing and deck restoration to remove buildup and bring exterior wood back to a
+              clean, ready-to-enjoy condition.
+            </p>
+          </article>
+
+          <article class="projects-card" data-categories="exterior repairs remodeling" id="project-deck-skirting">
+            <p class="projects-card__category">Exterior · Deck &amp; Lattice</p>
+            <h3 class="projects-card__title">Deck Skirting &amp; Lattice Repair</h3>
+            <div class="projects-card__compare" data-compare-container>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">Before</figcaption>
+                <span class="projects-card__badge" aria-hidden="true">Before</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/before_04.webp') }}" width="1200" height="1600" loading="lazy" decoding="async" alt="Deck skirting and lattice repair before: exterior carpentry project, Northern VA residence">
+              </figure>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">After</figcaption>
+                <span class="projects-card__badge projects-card__badge--after" aria-hidden="true">After</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/after_04.webp') }}" width="1600" height="1200" loading="lazy" decoding="async" alt="Exterior deck lattice and skirting repair after: outdoor living improvement, Springfield VA area">
+              </figure>
+            </div>
+            <p class="projects-card__text">
+              Replaced failing deck skirting and lattice to restore a clean, secure enclosure under the deck and
+              protect against moisture and pests.
+            </p>
+          </article>
+
+          <article class="projects-card" data-categories="exterior remodeling repairs" id="project-deck-addition">
+            <p class="projects-card__category">Exterior · Decking</p>
+            <h3 class="projects-card__title">New Deck Construction</h3>
+            <div class="projects-card__compare" data-compare-container>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">Before</figcaption>
+                <span class="projects-card__badge" aria-hidden="true">Before</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/before_05.webp') }}" width="1000" height="750" loading="lazy" decoding="async" alt="Rear yard before new deck construction: home exterior upgrade, Burke VA region">
+              </figure>
+              <figure class="projects-card__shot">
+                <figcaption class="visually-hidden">After</figcaption>
+                <span class="projects-card__badge projects-card__badge--after" aria-hidden="true">After</span>
+                <img class="projects-card__img" src="{{ url_for('static', filename='images/before-after/after_05.webp') }}" width="1000" height="750" loading="lazy" decoding="async" alt="New wood deck construction after: outdoor remodeling and carpentry for Northern Virginia homeowners">
+              </figure>
+            </div>
+            <p class="projects-card__text">
+              New deck construction and framing to expand outdoor living, with proper footings, structure, and finish
+              details built for safety and longevity.
+            </p>
+          </article>
+            </div>
+          </div>
+          {# Page 2+: duplicate the block above with data-page="2", id="projects-page-2", and a full .projects-section__grid of cards. Pagination shows extra numbers automatically when a page has at least one .projects-card. #}
+        </div>
+
+        <nav class="projects-pagination" id="projects-pagination" aria-label="Project gallery pages">
+          <button
+            type="button"
+            class="projects-pagination__arrow"
+            id="projects-pagination-prev"
+            data-dir="prev"
+            aria-label="Previous page"
+            disabled
+          >‹</button>
+          <ol class="projects-pagination__list" id="projects-pagination-list" role="list" aria-label="Page"></ol>
+          <button
+            type="button"
+            class="projects-pagination__arrow"
+            id="projects-pagination-next"
+            data-dir="next"
+            aria-label="Next page"
+            disabled
+          >›</button>
+        </nav>
+        <p class="projects-pagination__meta" id="projects-pagination-meta" aria-hidden="true"></p>
+        <p class="visually-hidden" id="projects-pagination-live" aria-live="polite"></p>
+
+        <div class="projects-section__cta">
+          <p class="projects-section__cta-label">Ready to start your own transformation?</p>
+          <a class="cta-button cta-button--projects" href="mailto:info@JDHomeImprovementLLC.com?subject=Free%20Quote%20Request">
+            Get Free Quote
+            <span class="cta-button__icon" aria-hidden="true">↗</span>
+            <span class="visually-hidden">Email us to request a free quote.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="faq-section__inner">
+        <header class="faq-section__header">
+          <p class="faq-section__eyebrow">Local Homeowners</p>
+          <h2 id="faq-heading" class="faq-section__title">Questions We Hear Often</h2>
+          <p class="faq-section__intro">
+            Straight answers about remodeling, repairs, estimates, and where we work, written
+            for real homeowners, not search-engine checklists.
+          </p>
+        </header>
+        <div class="faq-section__list">
+          {% for item in faq_items %}
+          <details class="faq-item">
+            <summary class="faq-item__summary">{{ item.q }}</summary>
+            <div class="faq-item__body">
+              <p class="faq-item__text">{{ item.a }}</p>
+            </div>
+          </details>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-heading">
+      <div class="contact-section__inner">
+        <header class="contact-section__header">
+          <p class="contact-section__eyebrow">Contact</p>
+          <h2 id="contact-heading" class="contact-section__title">
+            Let’s Talk About Your Project
+          </h2>
+          <p class="contact-section__intro">
+            Questions, timelines, or a free quote are all welcome if you are in Arlington,
+            Tysons, Springfield, Burke, Silver Spring, or nearby. Send a message and we&rsquo;ll
+            respond as soon as we can.
+          </p>
+        </header>
+
+        {% if contact_sent %}
+        <div class="contact-banner contact-banner--success" role="status" tabindex="-1" id="contact-feedback">
+          <span class="contact-banner__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.5 6.5L9 16l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Thanks! Your message was sent. We’ll get back to you soon.</span>
+        </div>
+        {% elif contact_error %}
+        <div class="contact-banner contact-banner--error" role="alert" tabindex="-1" id="contact-feedback">
+          {% if contact_error == 'csrf' %}
+          <span>Your session expired. Please refresh the page and try again.</span>
+          {% elif contact_error == 'validation' %}
+          <span>Please check the form and try again.</span>
+          {% elif contact_error == 'send' %}
+          <span>We couldn’t send your message. Please email us directly or try again in a moment.</span>
+          {% else %}
+          <span>Something went wrong. Please try again.</span>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="contact-section__body">
+          <aside class="contact-section__aside" aria-label="Contact">
+            <div class="contact-section__media">
+              <div class="contact-section__frame">
+                <img
+                  class="contact-section__image"
+                  src="{{ url_for('static', filename='images/form.webp') }}"
+                  width="1536"
+                  height="1024"
+                  loading="lazy"
+                  decoding="async"
+                  alt="JD Home Improvement team reviewing blueprints for a remodeling project for Northern Virginia and Maryland homeowners">
+                <div class="contact-section__image-scrim" aria-hidden="true"></div>
+              </div>
+            </div>
+          </aside>
+
+          <div class="contact-form-card">
+            <div class="contact-form-card__accent" aria-hidden="true"></div>
+            <canvas class="contact-confetti" id="contact-confetti" aria-hidden="true"></canvas>
+            <form
+              id="contact-form"
+              class="contact-form"
+              method="post"
+              action="{{ url_for('contact_submit') }}"
+              novalidate
+            >
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+              <p class="contact-form-global-error" id="contact-form-global-error" role="alert" hidden></p>
+
+              <div class="contact-form__hp" aria-hidden="true">
+                <label for="contact-company">Company</label>
+                <input type="text" id="contact-company" name="company" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="contact-form__row contact-form__row--split">
+                <div class="contact-field">
+                  <label class="contact-field__label" for="contact-name">Name <span class="contact-field__req">*</span></label>
+                  <input class="contact-field__input" type="text" id="contact-name" name="name" required autocomplete="name" maxlength="120">
+                  <p class="contact-field__error" id="contact-name-error" hidden></p>
+                </div>
+                <div class="contact-field">
+                  <label class="contact-field__label" for="contact-email">Email <span class="contact-field__req">*</span></label>
+                  <input class="contact-field__input" type="email" id="contact-email" name="email" required autocomplete="email" maxlength="254">
+                  <p class="contact-field__error" id="contact-email-error" hidden></p>
+                </div>
+              </div>
+
+              <div class="contact-form__row contact-form__row--split">
+                <div class="contact-field">
+                  <label class="contact-field__label" for="contact-phone">Phone</label>
+                  <input class="contact-field__input" type="tel" id="contact-phone" name="phone" autocomplete="tel" maxlength="40" placeholder="Optional">
+                  <p class="contact-field__error" id="contact-phone-error" hidden></p>
+                </div>
+                <div class="contact-field">
+                  <label class="contact-field__label" for="contact-topic">Topic <span class="contact-field__req">*</span></label>
+                  <div class="contact-field__select-wrap">
+                    <select class="contact-field__input contact-field__input--select" id="contact-topic" name="topic" required>
+                      <option value="" selected>Select a topic</option>
+                      <option value="general">General question</option>
+                      <option value="quote">Free quote</option>
+                      <option value="remodeling">Remodeling</option>
+                      <option value="repairs">Repairs &amp; maintenance</option>
+                      <option value="painting">Painting &amp; finishing</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <p class="contact-field__error" id="contact-topic-error" hidden></p>
+                </div>
+              </div>
+
+              <div class="contact-field">
+                <label class="contact-field__label" for="contact-message">Message <span class="contact-field__req">*</span></label>
+                <textarea class="contact-field__input contact-field__input--textarea" id="contact-message" name="message" required rows="4" maxlength="5000" placeholder="Tell us about your project, timeline, or questions…"></textarea>
+                <p class="contact-field__error" id="contact-message-error" hidden></p>
+              </div>
+
+              <div class="contact-form__footer">
+                <button type="submit" class="cta-button cta-button--contact" id="contact-submit">
+                  <span class="contact-form__btn-label">Send message</span>
+                  <span class="contact-form__btn-spinner" aria-hidden="true"></span>
+                </button>
+                <p class="contact-form__fineprint">
+                  By sending this form, you agree we may reply to the address you provide. We don’t share your information with third parties.
+                </p>
+              </div>
+            </form>
+
+            <div class="contact-direct" id="contact-footnote">
+              <div class="contact-direct__divider" aria-hidden="true"></div>
+              <p class="contact-direct__heading">Direct contact</p>
+              <div class="contact-direct__row">
+                <span class="contact-direct__icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 7h16v10H4V7z" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/>
+                    <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div class="contact-direct__body">
+                  <a class="contact-direct__email" href="mailto:info@JDHomeImprovementLLC.com">info@JDHomeImprovementLLC.com</a>
+                  <p class="contact-direct__meta">We typically respond within 24 hours.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-form-success" id="contact-form-success" hidden>
+              <div class="contact-form-success__inner">
+                <span class="contact-form-success__check" aria-hidden="true">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.75"/><path d="M12 20.5l6 6 10-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <p class="contact-form-success__title">Message sent</p>
+                <p class="contact-form-success__text">We’ll get back to you shortly. Thank you for reaching out.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="project-lightbox" id="project-lightbox" aria-labelledby="project-lightbox-title">
+      <p id="project-lightbox-title" class="visually-hidden">Project photo preview</p>
+      <div class="project-lightbox__shell">
+        <button type="button" class="project-lightbox__close" aria-label="Close preview">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="project-lightbox__frame">
+          <img class="project-lightbox__img" alt="" width="1600" height="1200">
+        </div>
+      </div>
+    </dialog>
+{% endblock %}

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block meta_title %}{{ meta_title }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ meta_description }}{% endblock %}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <!-- Canonical URL is generated from the request host via url_for(_external=True).
+       In production, set SERVER_NAME (or configure ProxyFix) so this always resolves
+       to the live domain rather than an internal hostname. -->
+  <link rel="canonical" href="{% block canonical_url %}{{ canonical_url }}{% endblock %}">
+  <meta name="theme-color" content="#e2e0dc">
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='images/favicon/android-chrome-512x512.png') }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='images/favicon/android-chrome-192x192.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon/favicon-16x16.png') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon/favicon.ico') }}" sizes="any">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon/apple-touch-icon.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='images/favicon/site.webmanifest') }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="JD Home Improvement LLC">
+  <meta property="og:url" content="{% block og_url %}{{ og_url }}{% endblock %}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="{% block og_title %}{{ og_title }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ og_description }}{% endblock %}">
+  <meta property="og:image" content="{{ og_image_url }}">
+  <meta property="og:image:width" content="{{ og_image_width }}">
+  <meta property="og:image:height" content="{{ og_image_height }}">
+  <meta property="og:image:alt" content="JD Home Improvement LLC - remodeling and home improvement in Northern Virginia and Silver Spring, MD">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block twitter_title %}{{ twitter_title }}{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}{{ twitter_description }}{% endblock %}">
+  <meta name="twitter:image" content="{{ og_image_url }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script type="application/ld+json">
+{{ structured_data | tojson }}
+  </script>
+</head>
+<body>
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Loading JD Home Improvement">
+    <div class="preloader__inner">
+      <svg class="preloader__scene" viewBox="0 0 200 170" aria-hidden="true" focusable="false">
+        <g class="preloader__struck">
+          <rect class="preloader__board" x="10" y="128" width="150" height="20" rx="5"/>
+          <line class="preloader__grain" x1="20" y1="135" x2="150" y2="135"/>
+          <line class="preloader__grain" x1="20" y1="143" x2="150" y2="143"/>
+
+          <g class="preloader__nail">
+            <rect class="preloader__nail-shaft" x="96" y="96" width="8" height="34" rx="1"/>
+            <rect class="preloader__nail-head" x="91" y="90" width="18" height="8" rx="2"/>
+          </g>
+
+          <g class="preloader__impact" fill="none">
+            <line x1="88" y1="88" x2="74" y2="80"/>
+            <line x1="112" y1="88" x2="126" y2="80"/>
+            <line x1="84" y1="96" x2="68" y2="96"/>
+            <line x1="116" y1="96" x2="132" y2="96"/>
+            <circle class="preloader__impact-dot" cx="100" cy="88" r="2.5" fill="currentColor" stroke="none"/>
+          </g>
+        </g>
+
+        <g class="preloader__hammer-pivot">
+          <rect class="preloader__handle" x="167.3" y="80" width="8" height="50" rx="4"/>
+          <rect class="preloader__head" x="143.3" y="130" width="56" height="22" rx="5"/>
+          <rect class="preloader__head-accent" x="143.3" y="130" width="56" height="6" rx="3"/>
+        </g>
+      </svg>
+      <p class="preloader__text">JD Home Improvement</p>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var preloader = document.getElementById("preloader");
+      if (!preloader) return;
+
+      var MIN_VISIBLE_MS = 2300; // let the full 2-hit hammer sequence play out once
+      var MAX_WAIT_MS = 5000; // safety net so the page is never stuck behind it
+      var shownAt = Date.now();
+      var hidden = false;
+
+      document.body.classList.add("is-loading");
+
+      function hide() {
+        if (hidden) return;
+        hidden = true;
+        var wait = Math.max(0, MIN_VISIBLE_MS - (Date.now() - shownAt));
+        window.setTimeout(function () {
+          preloader.classList.add("preloader--hidden");
+          document.body.classList.remove("is-loading");
+          window.setTimeout(function () {
+            if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+          }, 600);
+        }, wait);
+      }
+
+      if (document.readyState === "complete") {
+        hide();
+      } else {
+        window.addEventListener("load", hide);
+      }
+      window.setTimeout(hide, MAX_WAIT_MS);
+    })();
+  </script>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="site-nav__brand" href="{{ url_for('index', _anchor='hero') }}" aria-label="JD Home Improvement home">
+          <img
+            class="site-nav__logo"
+            src="{{ url_for('static', filename='images/jd-home-improvements-logo.webp') }}"
+            width="640"
+            height="427"
+            alt="JD Home Improvements logo: gold and silver initials with a roofline, tools, and Home Improvements wordmark">
+        </a>
+
+        <button
+          type="button"
+          class="site-nav__toggle"
+          aria-expanded="false"
+          aria-controls="site-nav-menu"
+          aria-label="Open menu"
+        >
+          <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+          <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+          <span class="site-nav__toggle-bar" aria-hidden="true"></span>
+        </button>
+
+        <div class="site-nav__panel" id="site-nav-menu">
+          <ul class="site-nav__links">
+            <li>
+              <a
+                href="{{ url_for('index', _anchor='hero') }}"
+                class="site-nav__link site-nav__link--section"
+                data-nav-section="hero"
+              >Home</a>
+            </li>
+            <li>
+              <a
+                href="{{ url_for('index', _anchor='about') }}"
+                class="site-nav__link site-nav__link--section"
+                data-nav-section="about"
+              >About</a>
+            </li>
+            <li>
+              <a
+                href="{{ url_for('index', _anchor='services') }}"
+                class="site-nav__link site-nav__link--section"
+                data-nav-section="services"
+              >Services</a>
+            </li>
+            <li>
+              <a
+                href="{{ url_for('index', _anchor='projects') }}"
+                class="site-nav__link site-nav__link--section"
+                data-nav-section="projects"
+              >Projects</a>
+            </li>
+            <li>
+              <a
+                href="{{ url_for('index', _anchor='faq') }}"
+                class="site-nav__link site-nav__link--section"
+                data-nav-section="faq"
+              >FAQ</a>
+            </li>
+            <li>
+              <a
+                href="{{ url_for('index', _anchor='contact') }}"
+                class="site-nav__link site-nav__link--section"
+                data-nav-section="contact"
+              >Contact</a>
+            </li>
+          </ul>
+          <a class="cta-button cta-button--nav" href="mailto:info@JDHomeImprovementLLC.com?subject=Free%20Quote%20Request">
+            Get Free Quote
+            <span class="cta-button__icon" aria-hidden="true">↗</span>
+            <span class="visually-hidden">Opens email to request a free quote.</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__accent" aria-hidden="true"></div>
+    <div class="site-footer__inner">
+      <div class="site-footer__grid">
+        <div class="site-footer__col site-footer__col--brand">
+          <a class="site-footer__brand-link" href="{{ url_for('index', _anchor='hero') }}" aria-label="JD Home Improvement home">
+            <img
+              class="site-footer__logo"
+              src="{{ url_for('static', filename='images/jd-home-improvements-logo.webp') }}"
+              width="640"
+              height="427"
+              loading="lazy"
+              decoding="async"
+              alt="JD Home Improvement logo">
+          </a>
+          <p class="site-footer__tagline">
+            Remodeling and home improvement contractor serving Northern Virginia
+            and Silver Spring, MD.
+          </p>
+          <ul class="site-footer__social" aria-label="Connect with JD Home Improvement">
+            <li>
+              <a
+                class="site-footer__social-link"
+                href="mailto:info@JDHomeImprovementLLC.com"
+                aria-label="Email us"
+              >
+                <svg class="site-footer__social-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 7h16v10H4V7z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                  <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <nav class="site-footer__col site-footer__col--nav" aria-label="Footer navigation">
+          <p class="site-footer__heading">Navigation</p>
+          <ul class="site-footer__links">
+            <li><a class="site-footer__link" href="{{ url_for('index', _anchor='hero') }}">Home</a></li>
+            <li><a class="site-footer__link" href="{{ url_for('index', _anchor='about') }}">About</a></li>
+            <li><a class="site-footer__link" href="{{ url_for('index', _anchor='services') }}">Services</a></li>
+            <li><a class="site-footer__link" href="{{ url_for('index', _anchor='projects') }}">Projects</a></li>
+            <li><a class="site-footer__link" href="{{ url_for('index', _anchor='faq') }}">FAQ</a></li>
+            <li><a class="site-footer__link" href="{{ url_for('index', _anchor='contact') }}">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-footer__col site-footer__col--contact">
+          <p class="site-footer__heading">Get In Touch</p>
+          <div class="site-footer__email-row">
+            <span class="site-footer__email-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 7h16v10H4V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <a class="site-footer__email" href="mailto:info@JDHomeImprovementLLC.com">info@JDHomeImprovementLLC.com</a>
+          </div>
+          <p class="site-footer__location">Northern Virginia &amp; Montgomery County, MD</p>
+          <a
+            class="site-footer__cta"
+            href="mailto:info@JDHomeImprovementLLC.com?subject=Request%20a%20Free%20Quote"
+          >
+            Request a Free Quote
+            <span class="site-footer__cta-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p class="site-footer__legal">
+          © <span id="footer-year">2026</span> JD Home Improvement LLC
+        </p>
+        <p class="site-footer__areas">
+          Serving
+          {% for area in service_areas %}<span>{{ area }}</span>{% if not loop.last %} &middot; {% endif %}{% endfor %}
+          &amp; nearby areas
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

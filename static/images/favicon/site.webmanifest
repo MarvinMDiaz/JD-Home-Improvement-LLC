@@ -1,0 +1,21 @@
+{
+  "name": "JD Home Improvement",
+  "short_name": "JD Home",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#e2e0dc",
+  "background_color": "#e2e0dc",
+  "icons": [
+    {
+      "src": "/static/images/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
