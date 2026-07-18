@@ -303,7 +303,7 @@ def _send_via_ses(
     phone: str,
     topic: str,
     message: str,
-) -> None:
+) -> Dict[str, Any]:
     region = os.environ.get("AWS_REGION", "us-east-1")
     from_addr = os.environ.get("SES_FROM_EMAIL", "").strip()
     to_addr = _get_ses_to_addr()
@@ -368,7 +368,7 @@ def _send_via_ses(
 """
 
     client = boto3.client("ses", region_name=region)
-    client.send_email(
+    response = client.send_email(
         Source=from_addr,
         Destination={"ToAddresses": [to_addr]},
         Message={
@@ -383,6 +383,7 @@ def _send_via_ses(
         },
         ReplyToAddresses=[email],
     )
+    return {"message_id": response.get("MessageId"), "to_addr": to_addr}
 
 
 @app.route("/")
@@ -439,9 +440,14 @@ def contact_submit():
         )
     else:
         try:
-            _send_via_ses(name, email, phone, topic, message)
+            ses_result = _send_via_ses(name, email, phone, topic, message)
             app.logger.info(
-                "Contact form sent via SES: name=%s email=%s topic=%s", name, email, topic
+                "Contact form sent via SES: name=%s email=%s topic=%s to=%s message_id=%s",
+                name,
+                email,
+                topic,
+                ses_result.get("to_addr"),
+                ses_result.get("message_id"),
             )
         except ClientError as exc:
             app.logger.exception("Amazon SES error: %s", exc)
