@@ -41,6 +41,21 @@ if __name__ != "__main__":
 
 csrf = CSRFProtect(app)
 
+
+def _static_version(filename: str) -> str:
+    """Cache-busting query param for static assets: derived from each file's
+    own mtime, so a browser that's cached an old main.js/styles.css is forced
+    to fetch the new one the moment the file changes on deploy, instead of
+    silently continuing to run stale JavaScript against the current markup."""
+    path = os.path.join(app.static_folder or "static", filename)
+    try:
+        return str(int(os.path.getmtime(path)))
+    except OSError:
+        return "0"
+
+
+app.jinja_env.globals["static_version"] = _static_version
+
 BUSINESS_LEGAL_NAME = "JD Home Improvement LLC"
 BUSINESS_PUBLIC_NAME = "JD Home Improvement"
 CONTACT_EMAIL_PUBLIC = "info@JDHomeImprovementLLC.com"
@@ -240,7 +255,7 @@ def _get_form_data() -> Dict[str, Any]:
             "phone": (body.get("phone") or "").strip(),
             "topic": (body.get("topic") or "").strip(),
             "message": (body.get("message") or "").strip(),
-            "hp_confirm": (body.get("hp_confirm") or "").strip(),
+            "company_website_confirm": (body.get("company_website_confirm") or "").strip(),
         }
     return {
         "name": (request.form.get("name") or "").strip(),
@@ -248,7 +263,7 @@ def _get_form_data() -> Dict[str, Any]:
         "phone": (request.form.get("phone") or "").strip(),
         "topic": (request.form.get("topic") or "").strip(),
         "message": (request.form.get("message") or "").strip(),
-        "hp_confirm": (request.form.get("hp_confirm") or "").strip(),
+        "company_website_confirm": (request.form.get("company_website_confirm") or "").strip(),
     }
 
 
@@ -426,15 +441,27 @@ def index():
 def contact_submit():
     data = _get_form_data()
 
-    # Honeypot: if filled, pretend success (bots). Logged (without the value
-    # itself) so a spike here is visible instead of silently swallowing
-    # submissions if a browser's autofill ever mis-fills this hidden field.
-    if data.get("hp_confirm"):
+    # Honeypot: normally pretend success (bots shouldn't learn they were
+    # caught). We log THAT it triggered and who it claimed to be, but never
+    # the honeypot field's own value. Set HONEYPOT_DEBUG=1 to instead return
+    # a real 400 here while diagnosing false positives (e.g. browser autofill
+    # mis-filling the hidden field) - never leave that on in production, since
+    # it tells bots their submission was rejected.
+    if data.get("company_website_confirm"):
         app.logger.info(
             "Contact form honeypot triggered, treated as bot: name=%s email=%s",
             data.get("name"),
             data.get("email"),
         )
+        honeypot_debug = os.environ.get("HONEYPOT_DEBUG", "").strip() in ("1", "true", "yes")
+        if honeypot_debug:
+            if _wants_json_response():
+                return jsonify(
+                    ok=False,
+                    error="honeypot",
+                    message="Honeypot field was populated (HONEYPOT_DEBUG=1).",
+                ), 400
+            return redirect(url_for("index") + "?error=honeypot#contact", code=303)
         if _wants_json_response():
             return jsonify(ok=True)
         return redirect(url_for("index") + "?sent=1#contact", code=303)

@@ -529,7 +529,7 @@
       phone: fd.get("phone"),
       topic: fd.get("topic"),
       message: fd.get("message"),
-      hp_confirm: fd.get("hp_confirm"),
+      company_website_confirm: fd.get("company_website_confirm"),
     };
 
     form.classList.add("is-loading");

@@ -2238,7 +2238,8 @@ img {
 
 .contact-form__hp {
   position: absolute;
-  left: -9999px;
+  left: -10000px;
+  top: auto;
   width: 1px;
   height: 1px;
   overflow: hidden;
