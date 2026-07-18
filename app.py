@@ -2,9 +2,10 @@ import html
 import logging
 import os
 import re
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any, Dict, List
 from xml.sax.saxutils import escape as xml_escape
+from zoneinfo import ZoneInfo
 
 import boto3
 from botocore.exceptions import BotoCoreError, ClientError
@@ -55,6 +56,12 @@ def _static_version(filename: str) -> str:
 
 
 app.jinja_env.globals["static_version"] = _static_version
+
+# All customer-facing timestamps (currently just the contact-email
+# "Submitted at" line) use US Eastern, matching the business's own timezone.
+# ZoneInfo("America/New_York") - not a fixed UTC-4/-5 offset - so this
+# correctly resolves to EST or EDT depending on the actual date.
+BUSINESS_TIMEZONE = ZoneInfo("America/New_York")
 
 BUSINESS_LEGAL_NAME = "JD Home Improvement LLC"
 BUSINESS_PUBLIC_NAME = "JD Home Improvement"
@@ -341,7 +348,7 @@ def _send_via_ses(
 
     topic_label = TOPIC_LABELS.get(topic, topic)
     phone_display = phone or "(not provided)"
-    submitted_at = datetime.now(timezone.utc).strftime("%B %d, %Y at %I:%M %p UTC")
+    submitted_at = datetime.now(BUSINESS_TIMEZONE).strftime("%B %d, %Y at %I:%M %p %Z")
 
     text_body = (
         "New Website Inquiry\n\n"
@@ -578,7 +585,7 @@ def robots_txt():
 def sitemap_xml():
     base = request.url_root.rstrip("/")
     loc = xml_escape(base + "/")
-    lastmod = datetime.now(timezone.utc).date().isoformat()
+    lastmod = datetime.now(BUSINESS_TIMEZONE).date().isoformat()
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
