@@ -227,7 +227,7 @@ def _get_form_data() -> Dict[str, Any]:
             "phone": (body.get("phone") or "").strip(),
             "topic": (body.get("topic") or "").strip(),
             "message": (body.get("message") or "").strip(),
-            "company": (body.get("company") or "").strip(),
+            "hp_confirm": (body.get("hp_confirm") or "").strip(),
         }
     return {
         "name": (request.form.get("name") or "").strip(),
@@ -235,7 +235,7 @@ def _get_form_data() -> Dict[str, Any]:
         "phone": (request.form.get("phone") or "").strip(),
         "topic": (request.form.get("topic") or "").strip(),
         "message": (request.form.get("message") or "").strip(),
-        "company": (request.form.get("company") or "").strip(),
+        "hp_confirm": (request.form.get("hp_confirm") or "").strip(),
     }
 
 
@@ -387,8 +387,15 @@ def index():
 def contact_submit():
     data = _get_form_data()
 
-    # Honeypot: if filled, pretend success (bots)
-    if data.get("company"):
+    # Honeypot: if filled, pretend success (bots). Logged (without the value
+    # itself) so a spike here is visible instead of silently swallowing
+    # submissions if a browser's autofill ever mis-fills this hidden field.
+    if data.get("hp_confirm"):
+        app.logger.info(
+            "Contact form honeypot triggered, treated as bot: name=%s email=%s",
+            data.get("name"),
+            data.get("email"),
+        )
         if _wants_json_response():
             return jsonify(ok=True)
         return redirect(url_for("index") + "?sent=1#contact", code=303)
